@@ -40,10 +40,11 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         //Check whether or not the player is on the ground
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.15f, groundMask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.1f, groundMask);
 
         if (hit.collider != null)
         {
+            Debug.Log("On Ground!");
             isGrounded = true;
         }
         else isGrounded = false;
