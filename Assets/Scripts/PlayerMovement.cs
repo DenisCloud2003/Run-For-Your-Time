@@ -44,7 +44,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (hit.collider != null)
         {
-            Debug.Log("On Ground!");
             isGrounded = true;
         }
         else isGrounded = false;
