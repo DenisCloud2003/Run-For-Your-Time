@@ -9,7 +9,7 @@ public class Goal : MonoBehaviour
     [SerializeField]
     private GameObject startPoint;
 
-    Timer timer;
+   public Timer timer;
 
     public void OnTriggerEnter2D(Collider2D collision)
     {

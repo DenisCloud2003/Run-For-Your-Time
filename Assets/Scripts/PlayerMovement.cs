@@ -41,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //Check whether or not the player is on the ground
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.1f, groundMask);
+        
 
         if (hit.collider != null)
         {
