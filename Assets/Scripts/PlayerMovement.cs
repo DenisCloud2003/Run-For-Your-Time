@@ -1,18 +1,18 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
-    private float moveSpeed = 10f;
+    private float moveSpeed = 4f;
 
     [HideInInspector]
     public float xAxis;
     private float yAxis;
 
     [SerializeField]
-    private float jumpForce = 350;
+    private float jumpForce = 200;
     private int groundMask;
     private bool isGrounded;
     private bool isJumpPressed;
