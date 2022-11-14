@@ -12,7 +12,6 @@ public class Watch : ItemBase
 
     public static Watch instance;
 
-    //Constructor
     private void Awake()
     {
         instance = this;
@@ -20,9 +19,6 @@ public class Watch : ItemBase
 
     public void Update()
     {
-        Use();
-
-        //Prevent spamming the clock
         if (cooldownTimer > 0f)
         {
             cooldownTimer -= Time.deltaTime;
@@ -37,14 +33,8 @@ public class Watch : ItemBase
         }
     }
 
-    //Check key input function
     public void KeyInput()
     {
-        if (!isForward && !isBackward)
-        {
-            isUsing = false;
-        }
-
         if (Input.GetKeyDown(KeyCode.R) && cooldownTimer == 0 && !isUsing)
         {
             if (count == 0)
@@ -60,16 +50,16 @@ public class Watch : ItemBase
 
             cooldownTimer = 1.5f;
         }
+
+        Use();
     }
 
-    //Set clock mode to forward
     void ForwardMode()
     {
         isForward = true;
         isBackward = false;
     }
 
-    //Set clock mode to backward
     void BackwardMode()
     {
         isBackward = true;
