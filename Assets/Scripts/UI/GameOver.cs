@@ -7,32 +7,21 @@ public class GameOver : MonoBehaviour
 {
     bool gameEnded = false;
     public float restartdelay = 1f;
-    public GameObject player;
+    Timer timer;
 
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void Update()
     {
-        if (collision.gameObject == player)
-        {
-            EndGame();
-        }
+        timer = GetComponent<Timer>();
     }
-    public void EndGame()
 
-    {
-        if (gameEnded == false)
-        {
-            gameEnded = true;
-            Debug.Log("GAME OVER");
-            Time.timeScale = 0f;
-            //Restart();
-            //Invoke("Restart", restartdelay);
-        }
-
-    }
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 }

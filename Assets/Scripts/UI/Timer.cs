@@ -30,6 +30,10 @@ public class Timer : MonoBehaviour
         {
             timer -= Time.deltaTime;
             UpdateTimerDisplay(timer);
+            if (timer <= 0)
+            {
+                timer = 0;
+            }
         }
     }
 
