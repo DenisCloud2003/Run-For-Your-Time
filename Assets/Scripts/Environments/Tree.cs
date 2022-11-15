@@ -18,7 +18,7 @@ public class Tree : Watch
         StartCoroutine(Timer());
     }
 
-    IEnumerator Timer()
+    public IEnumerator Timer()
     {
         yield return new WaitForSeconds(1.5f);
 

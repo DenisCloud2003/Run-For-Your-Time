@@ -5,23 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
-    bool gameEnded = false;
     public float restartdelay = 1f;
-    Timer timer;
-
-    public void Update()
-    {
-        timer = GetComponent<Timer>();
-    }
 
     public void Restart()
     {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void MainMenu()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 }

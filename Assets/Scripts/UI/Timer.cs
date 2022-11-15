@@ -3,6 +3,8 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
+    [SerializeField] GameObject gameOverPanel;
+
     public float timeDuration;
     private float timer;
     private bool timerPaused;
@@ -30,10 +32,12 @@ public class Timer : MonoBehaviour
         {
             timer -= Time.deltaTime;
             UpdateTimerDisplay(timer);
-            if (timer <= 0)
-            {
-                timer = 0;
-            }
+            
+        }
+
+        if (timer <= 0)
+        {
+            OutOfTime();
         }
     }
 
@@ -58,5 +62,12 @@ public class Timer : MonoBehaviour
     public void PauseTimer()
     {
         timerPaused = true;
+    }
+
+    public void OutOfTime()
+    {
+        timer = 0;
+        Time.timeScale = 0f;
+        gameOverPanel.SetActive(true);
     }
 }
