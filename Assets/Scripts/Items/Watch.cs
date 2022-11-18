@@ -6,10 +6,9 @@ public class Watch : ItemBase
 {
     [SerializeField] protected bool isForward;
     [SerializeField] protected bool isBackward;
-    [SerializeField] private bool isPickedUp;
+    //[SerializeField] protected bool isPickedUp;
 
     [SerializeField] GameObject watchPrefab;
-    [SerializeField] SpriteRenderer watchSprite;
 
     public int count = 0;
     public float cooldownTimer;
@@ -20,7 +19,6 @@ public class Watch : ItemBase
     private void Awake()
     {
         instance = this;
-        watchSprite = GetComponent<SpriteRenderer>();
     }
 
     public void Update()
@@ -39,38 +37,27 @@ public class Watch : ItemBase
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            watchSprite.enabled = false;
-            GetComponent<CircleCollider2D>().enabled = false;
-            isPickedUp = true;
-        }
-    }
-
     public void KeyInput()
     {
-        if (isPickedUp)
-        {
-            if (Input.GetKeyDown(KeyCode.R) && cooldownTimer == 0 && !isUsing)
-            {
-                if (count == 0)
-                {
-                    ForwardMode();
-                    count++;
-                }
-                else if (count == 1)
-                {
-                    BackwardMode();
-                    count--;
-                }
 
-                cooldownTimer = 1.5f;
+        if (Input.GetKeyDown(KeyCode.R) && cooldownTimer == 0 && !isUsing)
+        {
+            if (count == 0)
+            {
+                ForwardMode();
+                count++;
+            }
+            else if (count == 1)
+            {
+                BackwardMode();
+                count--;
             }
 
-            Use();
+            cooldownTimer = 1.5f;
         }
+
+        Use();
+
     }
 
     void ForwardMode()
