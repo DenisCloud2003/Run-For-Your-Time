@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tree : Watch
+public class Roots : Watch
 {
-    private int animCount = 0;
-    Animator treeAnim;
+    public GameObject triggerPoint;
+    protected int animCount = 0;
+    Animator rootsAnim;
 
     // Start is called before the first frame update
     void Start()
     {
-        treeAnim = GetComponent<Animator>();
+        rootsAnim = GetComponent<Animator>();
     }
 
     public void CheckInput()
@@ -24,21 +25,22 @@ public class Tree : Watch
 
         if (isUsing)
         {
-            if (isForward && !isBackward && animCount < 4)
+            if (isForward && !isBackward && animCount < 3)
             {
-                treeAnim.SetTrigger("Forward");
+                rootsAnim.SetTrigger("Forward");
                 animCount++;
             }
             else if (isBackward && !isForward && animCount > 0)
             {
-                treeAnim.SetTrigger("Backward");
+                rootsAnim.SetTrigger("Backward");
                 animCount--;
             }
             else StartCoroutine(Timer());
 
-            if (isForward && animCount == 4)
+            if (isForward && animCount == 3)
             {
                 isUsing = false;
+                triggerPoint.SetActive(true);
             }
         }
         else

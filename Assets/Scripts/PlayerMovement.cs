@@ -17,13 +17,14 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     private bool isJumpPressed;
     private Rigidbody2D rgbd;
+    private Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
         rgbd = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         groundMask = 1 << LayerMask.NameToLayer("Ground");
-
     }
 
     void Update()
@@ -42,7 +43,6 @@ public class PlayerMovement : MonoBehaviour
         //Check whether or not the player is on the ground
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.3f, groundMask);
         
-
         if (hit.collider != null)
         {
             isGrounded = true;
@@ -55,19 +55,41 @@ public class PlayerMovement : MonoBehaviour
         if (xAxis < 0)
         {
             vel.x = -moveSpeed;
+            anim.SetFloat("Speed", moveSpeed);
         }
         else if (xAxis > 0)
         {
             vel.x = moveSpeed;
+            anim.SetFloat("Speed", moveSpeed);
         }
-        else vel.x = 0;
+        else
+        {
+            vel.x = 0;
+            anim.SetFloat("Speed", 0f);
+        }
+
 
         if (isJumpPressed && isGrounded)
-        {
+        {   
             rgbd.AddForce(new Vector2(0, jumpForce));
             isJumpPressed = false;
         }
 
         rgbd.velocity = vel;
+        
+        if (rgbd.velocity.y > 0.1)
+        {
+            anim.SetBool("isJumping", true);
+        }
+        else if(rgbd.velocity.y < -0.1)
+        {
+            anim.SetBool("isJumping", false);
+            anim.SetBool("isFalling", true);
+        }
+        else
+        {
+            anim.SetBool("isJumping", false);
+            anim.SetBool("isFalling", false);
+        }
     }
 }

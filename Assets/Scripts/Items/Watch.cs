@@ -10,7 +10,7 @@ public class Watch : ItemBase
 
     [SerializeField] GameObject watchPrefab;
 
-    public int count = 0;
+    [HideInInspector] public int count = 0;
     public float cooldownTimer;
 
     public static Watch instance;

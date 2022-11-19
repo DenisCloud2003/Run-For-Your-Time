@@ -17,10 +17,11 @@ public class Timer : MonoBehaviour
     private TextMeshProUGUI firstSecond;
     [SerializeField]
     private TextMeshProUGUI secondSecond;
-
+    bool isPause;
     // Start is called before the first frame update
     void Start()
     {
+        isPause = false;
         TimerReset();
         timer = timeDuration;
     }
@@ -35,8 +36,9 @@ public class Timer : MonoBehaviour
             
         }
 
-        if (timer <= 0)
+        if (timer <= 0 &&!isPause)
         {
+            isPause = true;
             OutOfTime();
         }
     }
@@ -66,6 +68,7 @@ public class Timer : MonoBehaviour
 
     public void OutOfTime()
     {
+        Debug.Log("set time scale =0");
         timer = 0;
         Time.timeScale = 0f;
         gameOverPanel.SetActive(true);
