@@ -16,8 +16,11 @@ public class PlayerMovement : MonoBehaviour
     private int groundMask;
     private bool isGrounded;
     private bool isJumpPressed;
+    private bool isFacingRight = true;
     private Rigidbody2D rgbd;
     private Animator anim;
+
+    Vector3 localScale;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
         rgbd = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         groundMask = 1 << LayerMask.NameToLayer("Ground");
+        localScale = transform.localScale;
     }
 
     void Update()
@@ -35,6 +39,11 @@ public class PlayerMovement : MonoBehaviour
         {
             isJumpPressed = true;
         }
+    }
+
+    private void LateUpdate()
+    {
+        Flip();
     }
 
     // Update is called once per frame
@@ -56,11 +65,13 @@ public class PlayerMovement : MonoBehaviour
         {
             vel.x = -moveSpeed;
             anim.SetFloat("Speed", moveSpeed);
+            isFacingRight = false;
         }
         else if (xAxis > 0)
         {
             vel.x = moveSpeed;
             anim.SetFloat("Speed", moveSpeed);
+            isFacingRight = true;
         }
         else
         {
@@ -91,5 +102,27 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("isJumping", false);
             anim.SetBool("isFalling", false);
         }
+    }
+
+    private void Flip()
+    {
+        if ((isFacingRight && localScale.x < 0) || (!isFacingRight && localScale.x > 0))
+        {
+            localScale.x *= -1;
+        }
+
+        transform.localScale = localScale;
+    }
+
+    public void Dead()
+    {
+        anim.SetBool("isDead", true);
+        StartCoroutine(TimeDelay());
+    }
+
+    IEnumerator TimeDelay()
+    {
+        yield return new WaitForSeconds(2f);
+        this.enabled = false;
     }
 }

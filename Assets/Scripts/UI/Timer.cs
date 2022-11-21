@@ -4,10 +4,13 @@ using TMPro;
 public class Timer : MonoBehaviour
 {
     [SerializeField] GameObject gameOverPanel;
+    public TextManager textManager;
 
     public float timeDuration;
     private float timer;
     private bool timerPaused;
+    bool isPause;
+    string text;
 
     [SerializeField]
     private TextMeshProUGUI firstMinute;
@@ -17,7 +20,7 @@ public class Timer : MonoBehaviour
     private TextMeshProUGUI firstSecond;
     [SerializeField]
     private TextMeshProUGUI secondSecond;
-    bool isPause;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,9 +71,10 @@ public class Timer : MonoBehaviour
 
     public void OutOfTime()
     {
-        Debug.Log("set time scale =0");
         timer = 0;
         Time.timeScale = 0f;
         gameOverPanel.SetActive(true);
+        text = "OfT";
+        textManager.TextChanger(text);
     }
 }

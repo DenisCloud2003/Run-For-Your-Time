@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - endPoint
+  - endPoint1
+  - endPoint2
+  - Obstacle
+  - fallPoint
   layers:
   - Default
   - TransparentFX
