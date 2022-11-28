@@ -18,6 +18,11 @@ public class Roots2 : Watch
         StartCoroutine(Timer());
     }
 
+    public void BrokenAnimState()
+    {
+        roots2Anim.SetTrigger("Broken");
+    }
+
     public IEnumerator Timer()
     {
         yield return new WaitForSeconds(1.5f);

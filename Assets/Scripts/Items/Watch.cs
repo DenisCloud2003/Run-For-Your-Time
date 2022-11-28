@@ -6,7 +6,7 @@ public class Watch : ItemBase
 {
     [SerializeField] protected bool isForward;
     [SerializeField] protected bool isBackward;
-    //[SerializeField] protected bool isPickedUp;
+    [SerializeField] protected bool isPickedUp;
 
     [SerializeField] GameObject watchPrefab;
 

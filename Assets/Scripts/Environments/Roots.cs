@@ -5,18 +5,25 @@ using UnityEngine;
 public class Roots : Watch
 {
     public GameObject triggerPoint;
+
     protected int animCount = 0;
-    Animator rootsAnim;
+    
+    [HideInInspector] Animator rootsAnim;
 
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        rootsAnim = GetComponent<Animator>();
+       rootsAnim = GetComponent<Animator>();
     }
 
     public void CheckInput()
     {
         StartCoroutine(Timer());
+    }
+
+    public void BrokenAnimState()
+    {
+        rootsAnim.SetTrigger("Broken");
     }
 
     public IEnumerator Timer()

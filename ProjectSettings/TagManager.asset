@@ -9,6 +9,7 @@ TagManager:
   - endPoint2
   - Obstacle
   - fallPoint
+  - Item
   layers:
   - Default
   - TransparentFX
