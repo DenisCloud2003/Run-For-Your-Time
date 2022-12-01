@@ -2,27 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemList : MonoBehaviour
+public class ItemList : ItemBase
 {
-    [SerializeField] GameObject[] Items;
-    private int data;
+    [SerializeField] protected GameObject[] Items;
+    [HideInInspector] private int rotateCount = 0;
 
     private void Awake()
     {
-        
+        Items = GameObject.FindGameObjectsWithTag("Item");
     }
 
-    private int Return()
+    private void RotateItems()
     {
-        foreach (GameObject item in Items)
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            if (item.name == "Watch")
+            if (rotateCount == 0 && Items[rotateCount].name == "Watch")
             {
-                data = 0;
+                rotateCount++;
             }
-            else data = 1;
+            else rotateCount--;
         }
-
-        return data;
     }
 }

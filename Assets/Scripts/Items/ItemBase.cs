@@ -7,13 +7,13 @@ public class ItemBase : MonoBehaviour
     [SerializeField] protected bool isUsing;
     [HideInInspector] private int inputCount = 0;
 
+    //Use function
     protected void Use()
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
             if (inputCount == 0)
             {
-                Debug.Log("Axe Used");
                 isUsing = true;
                 inputCount++;
             }
@@ -21,11 +21,11 @@ public class ItemBase : MonoBehaviour
             {
                 isUsing = false;
                 inputCount--;
-            }
-            
+            }    
         }
     }
 
+    //Uncheck the use condition
     protected void NotUse()
     {
         isUsing = false;

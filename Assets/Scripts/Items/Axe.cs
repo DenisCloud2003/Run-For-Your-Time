@@ -5,8 +5,8 @@ using UnityEngine;
 public class Axe : ItemBase
 {
     [SerializeField] public UsePoint usePoint;
-    SpriteRenderer axeSprite;
     [SerializeField] bool isPickedUp;
+    SpriteRenderer axeSprite;
 
     private void Awake()
     {
@@ -14,20 +14,22 @@ public class Axe : ItemBase
         isPickedUp = false;
     }
 
+    //Check using state
     private void Update()
     {
         UseAxe();
     }
 
+    //Use the axe
     private void UseAxe()
     {
         if (isPickedUp && usePoint.UseState())
         {
             Use();
-            StartCoroutine(DelayAfterUse());
         }
     }
 
+    //Pick up axe
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -35,11 +37,5 @@ public class Axe : ItemBase
             axeSprite.enabled = false;
             isPickedUp = true;
         }
-    }
-
-    IEnumerator DelayAfterUse()
-    {
-        yield return new WaitForSeconds(1f);
-        NotUse();
     }
 }
